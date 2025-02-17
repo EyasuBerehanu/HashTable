@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-//Eyasu Berehanu
-//2/14/2025
+//Eyasu Berehanu 
+//2/14/20255
 //I got some help from my table mates about how my assiment should work/look like but no code from them
 //a strong chuck of my code was orignated from my student list./link list assigment
 //assigment and this link: https://www.geeksforgeeks.org/implementation-of-hash-table-in-c-using-separate-chaining/
@@ -15,13 +14,6 @@
 #include <set>
 #include "student.h" 
 #include "head.h"    
-=======
-#include <iostream>
-#include <cstring>
-#include <iomanip>   
-#include "student.h"
-#include "head.h"
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
 
 using namespace std;
 
@@ -31,7 +23,6 @@ void add(HashMap* map, student* newStudent);
 void print(HashMap* map);                                   
 void deletee(HashMap* map, int id);      
 void average(HashMap* map, double& GPA, int& count);       
-<<<<<<< HEAD
 void resizeHashMap(HashMap* map);
 int randomizer(HashMap* map);
 int rando();
@@ -68,47 +59,10 @@ void resizeHashMap(HashMap* map) { // resizes hash table if number of collisions
     int oldCapacity = map->capacity;
     map->capacity = map->capacity * 2;  // then this doubles capacity of hash table
     HashMapNode** newArr = new HashMapNode*[map->capacity];  // new array for resized table
-=======
-void incHashMap(HashMap* map);
-
-
-struct HashMapNode {
-    student* studentPointer;  
-   struct HashMapNode* next;    
-};
-
-
-struct HashMap {
-    int capacity;
-    int size; 
-    HashMapNode** arr;  
-};
-
-void initializeHashMap(HashMap* map) {
-    map->capacity = 100;  
-    map->size = 0;       
-    map->arr = new HashMapNode*[map->capacity];
-    for (int i = 0; i < map->capacity; i++) {
-        map->arr[i] = nullptr;
-    }
-}
-
-
-int hashFunction(HashMap* map, int key) {
-    return key % map->capacity;
-}
-
-
-void incHashMap(HashMap* map) {
-    int oldCapacity = map->capacity;
-    map->capacity = map->capacity * 2;    
-    HashMapNode** newArr = new HashMapNode*[map->capacity];
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
 
     for (int i = 0; i < map->capacity; i++) {
         newArr[i] = nullptr;
     }
-<<<<<<< HEAD
     
    //(debugging line if you want to try) cout << "Old capacity before resizing " << oldCapacity << " to " << map->capacity << endl;
     
@@ -118,13 +72,6 @@ void incHashMap(HashMap* map) {
         while (current != nullptr) {
             int newIndex = hashFunction(map, current->studentPointer->getID());
             //(debugging line if you want to try) cout << "Rehashing ID " << current->studentPointer->getID() << " to new index " << newIndex << endl;  // Debugging line
-=======
-
-    for (int i = 0; i < oldCapacity; i++) {
-        HashMapNode* current = map->arr[i];
-        while (current != nullptr) {
-            int newIndex = hashFunction(map, current->studentPointer->getID());
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
             HashMapNode* newNode = new HashMapNode();
             newNode->studentPointer = current->studentPointer;
             newNode->next = newArr[newIndex];
@@ -133,7 +80,6 @@ void incHashMap(HashMap* map) {
         }
     }
 
-<<<<<<< HEAD
     
     delete[] map->arr; // deletes old array 
     map->arr = newArr; //assigns the resized array to  map
@@ -151,31 +97,12 @@ int main() { //where all prompts are stored where the user can do commands and i
     while (start = true) {
         cout << "Enter ADD, PRINT, DELETE, RANDOM, AVERAGE, or QUIT: " << endl;
         cin.getline(input, 80, '\n');  
-=======
-    delete[] map->arr;
-    map->arr = newArr;
-}
-
-int main() {
-    char input[80];        
-    bool start = true;
-    HashMap map;
-    initializeHashMap(&map);
-
-    while (start) {
-        cout << "Enter ADD, PRINT, DELETE, AVERAGE, or QUIT: " << endl; 
-        cin.getline(input, 80, '\n'); 
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
 
         if (strcmp(input, "ADD") == 0) { 
             char names[80];              
             cout << "Enter name: " << endl;
             cin.getline(input, 80, '\n'); 
-<<<<<<< HEAD
             strcpy(names, input);  
-=======
-            strcpy(names, input);         
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
 
             double gpa;  
             int id;     
@@ -184,7 +111,6 @@ int main() {
 
             cout << "Enter GPA: " << endl;
             cin >> gpa;          
-<<<<<<< HEAD
             cin.ignore();  
 
             student* temp = new student(id, gpa, names); 
@@ -218,52 +144,15 @@ int main() {
 
 void add(HashMap* map, student* newStudent) { // add a student to the hash map
     int index = hashFunction(map, newStudent->getID());  //caluatees index using hash function
-=======
-            cin.ignore();       
-
-            student* temp = new student(id, gpa, names); 
-            add(&map, temp);  // Add student to the hash map
-
-        } else if (strcmp(input, "PRINT") == 0) { 
-            print(&map);
-
-        } else if (strcmp(input, "DELETE") == 0) { 
-            cout << "Enter ID to delete: " << endl;
-            cin.getline(input, 80, '\n'); 
-            deletee(&map, atoi(input)); 
-
-        } else if (strcmp(input, "AVERAGE") == 0) { 
-            double GPA = 0.0; 
-            int count = 0;    
-            average(&map, GPA, count); 
-
-        } else if (strcmp(input, "QUIT") == 0) { 
-            return 0; 
-        } else {
-            cout << "Invalid command." << endl; 
-        }
-    }
-
-    return 0; 
-}
-
-void add(HashMap* map, student* newStudent) {
-    int index = hashFunction(map, newStudent->getID());
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
     
     HashMapNode* current = map->arr[index];
     int collisionCount = 0;
     
-<<<<<<< HEAD
     while (current != nullptr) { //looks at the ammount of collistions that has happend
-=======
-    while (current != nullptr) {
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
         collisionCount++;
         current = current->next;
     }
 
-<<<<<<< HEAD
     if (collisionCount >= 3) { //resizes map if to many colliistons happen or when it excceds 3
         resizeHashMap(map);
         index = hashFunction(map, newStudent->getID());  // Recalculate index after resizing
@@ -285,34 +174,11 @@ void print(HashMap* map) { // prints all the students in the hash map
         while (current != nullptr) {
             current->studentPointer->printData();  // prints data of the student
             cout << "GPA: " << current->studentPointer->getGpa() << endl;  // this prints the gpa as its not in student.cpp
-=======
-    if (collisionCount >= 3) {
-        incHashMap(map);
-        index = hashFunction(map, newStudent->getID());  
-    }
-
-    HashMapNode* newNode = new HashMapNode();
-    newNode->studentPointer = newStudent;
-    newNode->next = map->arr[index];
-    map->arr[index] = newNode;
-    map->size++;
-    cout << "Key: " << index << endl;
-}
-
-void print(HashMap* map) {
-    for (int i = 0; i < map->capacity; i++) {
-        HashMapNode* current = map->arr[i];
-        while (current != nullptr) {
-            current->studentPointer->printData();
-            cout << "GPA: " << current->studentPointer->getGpa() << endl; 
-             
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
             current = current->next;
         }
     }
 }
 
-<<<<<<< HEAD
 
 void deletee(HashMap* map, int id) { // deletes a student using ID from the hash map
     int index = hashFunction(map, id);  
@@ -321,31 +187,18 @@ void deletee(HashMap* map, int id) { // deletes a student using ID from the hash
 
 
     while (currNode != nullptr) { // moves through linked list to find the student by ID then removes the srtudent from the list removing it from the has table as well
-=======
-void deletee(HashMap* map, int id) { //Very Good
-    int index = hashFunction(map, id); 
-    HashMapNode* prevNode = nullptr;
-    HashMapNode* currNode = map->arr[index];
-
-    while (currNode != nullptr) {
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
         if (currNode->studentPointer->getID() == id) {
             if (prevNode == nullptr) {
                 map->arr[index] = currNode->next;  
             } else {
                 prevNode->next = currNode->next;  
             }
-<<<<<<< HEAD
             delete currNode;  // frees memory of deleted node
-=======
-            delete currNode;
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
             return;
         }
         prevNode = currNode;
         currNode = currNode->next;
     }
-<<<<<<< HEAD
     cout << "Student ID not found." << endl;  // If student not found
 }
 
@@ -355,22 +208,10 @@ void average(HashMap* map, double& GPA, int& count) { //calculates the average G
         while (current != nullptr) {
             GPA += current->studentPointer->getGpa();  // adds all student's GPA
             count++;  // increases count of students
-=======
-    cout << "Student ID not found." << endl;
-}
-
-void average(HashMap* map, double& GPA, int& count) {
-    for (int i = 0; i < map->capacity; i++) {
-        HashMapNode* current = map->arr[i];
-        while (current != nullptr) {
-            GPA += current->studentPointer->getGpa();
-            count++;
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
             current = current->next;
         }
     }
 
-<<<<<<< HEAD
     if (count > 0) { //calculates and print the average GPA
         cout << "Average GPA: " << fixed << setprecision(2) << GPA / count << endl;
     }
@@ -421,9 +262,3 @@ int randomizer(HashMap* map) { // adds random students to the hash map
     file.close();  
     return 0;
 }
-=======
-    if (count > 0) {
-        cout << "Average GPA: " << fixed << setprecision(2) << GPA / count << endl;
-    }
-}
->>>>>>> b851a85f4b0d297c3f66011e1c8e6d30822db075
